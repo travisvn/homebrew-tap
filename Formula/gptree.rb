@@ -2,16 +2,16 @@ class Gptree < Formula
   desc "Project tree structure and file content aggregator for providing LLM context"
   homepage "https://github.com/travisvn/gptree"
   license "MIT"
-  version "v1.0.10"
+  version "v1.1.0"
 
   on_macos do
-    url "https://github.com/travisvn/gptree/releases/download/v1.0.10/gptree-macos"
-    sha256 "10f5af4fa88f0aeab0b7191608f8e693f7cd72561a185866f8f8071b3013c573"
+    url "https://github.com/travisvn/gptree/releases/download/v1.1.0/gptree-macos"
+    sha256 "1070982934576993718bec83fb9b204701ad4aa77de0345e56ec246321a82bfb"
   end
 
   on_linux do
-    url "https://github.com/travisvn/gptree/releases/download/v1.0.10/gptree-ubuntu"
-    sha256 "434b682ada6f338f9034d6df95b9802e4efe13621276dff2201bcba63f50d0a4"
+    url "https://github.com/travisvn/gptree/releases/download/v1.1.0/gptree-ubuntu"
+    sha256 "9e39b29e41de9cd6e27891be1fb04f3fea855f064b69d56d3c4735f76b69cb08"
   end
 
   def install
