@@ -3,7 +3,7 @@
   
     desc "Project tree structure and file content aggregator for providing LLM context"
     homepage "https://github.com/travisvn/gptree"
-    version "1.1.1"
+    version "v1.1.1"
     license "MIT"
   
     depends_on "python@3.9" => :optional
@@ -19,13 +19,13 @@
     end
   
     resource "pyperclip" do
-      url "https://files.pythonhosted.org/packages/source/p/pyperclip/pyperclip-1.8.2.tar.gz"
-      sha256 "e7bc33d8b99c4ec5a27af3a3f9aa6d198f40adf08b58b1206469d91701b987b8"
+      url "https://files.pythonhosted.org/packages/source/p/pyperclip/pyperclip-1.9.0.tar.gz"
+      sha256 "b7de0142ddc81bfc5c7507eea19da920b92252b548b96186caf94a5e2527d310"
     end
   
     resource "pathspec" do
-      url "https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-0.10.3.tar.gz"
-      sha256 "46b3d6b39ab1a07e6da29a234567fb1e875e9a535eaf75516d4c6d32e13eac20"
+      url "https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-0.12.1.tar.gz"
+      sha256 "a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"
     end
   
     def install
