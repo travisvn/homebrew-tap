@@ -29,11 +29,13 @@
     end
   
     def install
-      python_path = Formula["python"].opt_bin/"python3" if Formula["python"].linked_keg.exist?
-      pip_path = Formula["python"].opt_bin/"pip3" if Formula["python"].linked_keg.exist?
+      # Find python3 and pip3 in the user's PATH
+      python_path = `which python3`.chomp
+      pip_path = `which pip3`.chomp
   
-      if python_path && File.exist?(python_path) && system("#{pip_path} --version")
+      if !python_path.empty? && !pip_path.empty? && system("#{python_path}", "--version") && system("#{pip_path}", "--version")
         opoo "Python and pip detected. Installing with pip."
+        ENV.prepend_path "PATH", File.dirname(python_path) # Ensure the detected Python is prioritized
         virtualenv_install_with_resources
       else
         opoo "Python or pip not detected. Falling back to binary installation."
