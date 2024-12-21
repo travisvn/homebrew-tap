@@ -2,45 +2,50 @@ class Gptree < Formula
   desc "Project tree structure and file content aggregator for providing LLM context"
   homepage "https://github.com/travisvn/gptree"
   license "MIT"
-  version "v1.1.2"
+  version "v1.1.3"
 
-  depends_on "python@3.9" => :optional
+  depends_on "python" => :optional
+
+  on_macos do
+    url "https://github.com/travisvn/gptree/releases/download/v1.1.3/gptree-macos"
+    sha256 "cd20e3ed56659bbce313522abc84397ef06a844a48f964ee7d8e64354ad58e38"
+  end
+
+  on_linux do
+    url "https://github.com/travisvn/gptree/releases/download/v1.1.3/gptree-ubuntu"
+    sha256 "7e1d3559833af8f4f37ae13ac17910050d826b938ee70b7877c406560d0e9acd"
+  end
+
+  resource "pyperclip" do
+    url "https://files.pythonhosted.org/packages/source/p/pyperclip/pyperclip-1.9.0.tar.gz"
+    sha256 "b7de0142ddc81bfc5c7507eea19da920b92252b548b96186caf94a5e2527d310"
+  end
+
+  resource "pathspec" do
+    url "https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-0.12.1.tar.gz"
+    sha256 "a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"
+  end
 
   def install
-    if system("which pip3")
-      # Attempt to install via pip
-      pip_success = system("pip3", "install", "gptree-cli==v1.1.2", "--prefix=#{prefix}")
-      unless pip_success
-        opoo "pip3 installation failed. Falling back to binary installation."
-        download_and_install_binary
-      end
+    # Find python3 and pip3 in the user's PATH
+    python_path = /usr/bin/python3.chomp
+    pip_path = /usr/bin/pip3.chomp
+
+    if !python_path.empty? && !pip_path.empty? && system("#{python_path}", "--version") && system("#{pip_path}", "--version")
+      opoo "Python and pip detected. Installing with pip."
+      ENV.prepend_path "PATH", File.dirname(python_path) # Ensure the detected Python is prioritized
+      virtualenv_install_with_resources
     else
-      # Fallback to binary installation if pip3 isn't available
-      download_and_install_binary
+      opoo "Python or pip not detected. Falling back to binary installation."
+      install_binary
     end
   end
 
-  def download_and_install_binary
+  def install_binary
     if OS.mac?
-      url = "https://github.com/travisvn/gptree/releases/download/v1.1.2/gptree-macos"
-      sha256 = "f73e22296a923d53e53abd682310a4d9d52a27e4c6b23b1a22f2c4921841a78b"
-      fetch_and_install(url, sha256, "gptree-macos")
+      bin.install "gptree-macos" => "gptree"
     elsif OS.linux?
-      url = "https://github.com/travisvn/gptree/releases/download/v1.1.2/gptree-ubuntu"
-      sha256 = "f1d7c0b9b4dd87bf40dd2b3adbe5a6525572e1fd278c5a0e8062251f455be740"
-      fetch_and_install(url, sha256, "gptree-ubuntu")
-    end
-  end
-
-  def fetch_and_install(url, sha256, filename)
-    # Download the file manually
-    resource filename do
-      url url
-      sha256 sha256
-    end
-
-    resource(filename).stage do
-      bin.install filename => "gptree"
+      bin.install "gptree-ubuntu" => "gptree"
     end
   end
 
