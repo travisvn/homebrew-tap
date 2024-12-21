@@ -6,7 +6,7 @@
     version "v1.1.1"
     license "MIT"
   
-    depends_on "python@3.9" => :optional
+    depends_on "python" => :optional
   
     on_macos do
       url "https://github.com/travisvn/gptree/releases/download/v1.1.1/gptree-macos"
@@ -29,11 +29,14 @@
     end
   
     def install
-      if Formula["python@3.9"].linked_keg.exist? && system("which pip3")
-        opoo "Python and pip3 detected. Installing with pip."
+      python_path = Formula["python"].opt_bin/"python3" if Formula["python"].linked_keg.exist?
+      pip_path = Formula["python"].opt_bin/"pip3" if Formula["python"].linked_keg.exist?
+  
+      if python_path && File.exist?(python_path) && system("#{pip_path} --version")
+        opoo "Python and pip detected. Installing with pip."
         virtualenv_install_with_resources
       else
-        opoo "Python or pip3 not detected. Falling back to binary installation."
+        opoo "Python or pip not detected. Falling back to binary installation."
         install_binary
       end
     end
