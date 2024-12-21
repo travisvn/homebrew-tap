@@ -1,8 +1,10 @@
 class Gptree < Formula
+  include Language::Python::Virtualenv
+
   desc "Project tree structure and file content aggregator for providing LLM context"
   homepage "https://github.com/travisvn/gptree"
-  license "MIT"
   version "v1.1.3"
+  license "MIT"
 
   depends_on "python" => :optional
 
@@ -28,8 +30,8 @@ class Gptree < Formula
 
   def install
     # Find python3 and pip3 in the user's PATH
-    python_path = /usr/bin/python3.chomp
-    pip_path = /usr/bin/pip3.chomp
+    python_path = `which python3`.chomp
+    pip_path = `which pip3`.chomp
 
     if !python_path.empty? && !pip_path.empty? && system("#{python_path}", "--version") && system("#{pip_path}", "--version")
       opoo "Python and pip detected. Installing with pip."
