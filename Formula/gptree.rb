@@ -3,19 +3,19 @@ class Gptree < Formula
 
   desc "Project tree structure and file content aggregator for providing LLM context"
   homepage "https://github.com/travisvn/gptree"
-  version "v1.2.0"
+  version "main"
   license "GPLv3"
 
   depends_on "python" => :optional
 
   on_macos do
-    url "https://github.com/travisvn/gptree/releases/download/v1.2.0/gptree-macos"
-    sha256 "e9eee0445322954112afc0097ec7d41a615daa15d4e743c04aeb46242e6ba55f"
+    url "https://github.com/travisvn/gptree/releases/download/main/gptree-macos"
+    sha256 "948a245ac19edd4ddf161d66d3a844888584ff4627b0bdb34d08d3334555b20d"
   end
 
   on_linux do
-    url "https://github.com/travisvn/gptree/releases/download/v1.2.0/gptree-ubuntu"
-    sha256 "fc5d080041c985b5e62dca948d6ea03216a0be6cd0a43ff3b4bcdfcfc93f7970"
+    url "https://github.com/travisvn/gptree/releases/download/main/gptree-ubuntu"
+    sha256 "6a36a016a048e75c04aeec62b9b45728f76657e5eb9da2fe0b3b35b990447d59"
   end
 
   resource "pyperclip" do
@@ -32,7 +32,7 @@ class Gptree < Formula
     python_path = `which python3`.chomp
     pip_path = `which pip3`.chomp
 
-    if !python_path.empty? && !pip_path.empty? && system("\#{python_path}", "--version") && system("\#{pip_path}", "--version")
+    if !python_path.empty? && !pip_path.empty? && system("#{python_path}", "--version") && system("#{pip_path}", "--version")
       opoo "Python and pip detected. Installing with pip."
       ENV.prepend_path "PATH", File.dirname(python_path) # Ensure the detected Python is prioritized
       virtualenv_install_with_resources
