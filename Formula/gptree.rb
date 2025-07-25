@@ -15,7 +15,7 @@ class Gptree < Formula
 
   on_linux do
     url "https://github.com/travisvn/gptree/releases/download/v1.6.0/gptree-ubuntu"
-    sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+    sha256 "fec96a5a0370619de4cd574b200ab53b2efd2080f7ae8df1c9cd85db1a13523f"
   end
 
   resource "pyperclip" do
