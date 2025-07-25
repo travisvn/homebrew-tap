@@ -3,19 +3,19 @@ class Gptree < Formula
 
   desc "Project tree structure and file content aggregator for providing LLM context"
   homepage "https://github.com/travisvn/gptree"
-  version "v1.5.0"
+  version "v1.6.0"
   license "GPLv3"
 
   depends_on "python" => :optional
 
   on_macos do
-    url "https://github.com/travisvn/gptree/releases/download/v1.5.0/gptree-macos"
-    sha256 "3aeee3abbed7a9d49ac3873f2788826e33f7868c04e893ddf68d86d0d327494e"
+    url "https://github.com/travisvn/gptree/releases/download/v1.6.0/gptree-macos"
+    sha256 "90188b3474f3e7c0a0bc4f22f64fa09b6477b054de9671d5d2acaecdadc04404"
   end
 
   on_linux do
-    url "https://github.com/travisvn/gptree/releases/download/v1.5.0/gptree-ubuntu"
-    sha256 "5b9ac65dbffed892ff6d51124c23ac18f38f76366cae26899ecac542c6dcf3ef"
+    url "https://github.com/travisvn/gptree/releases/download/v1.6.0/gptree-ubuntu"
+    sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
   end
 
   resource "pyperclip" do
